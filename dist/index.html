@@ -11,7 +11,103 @@
     <title>TodoVerse - TodoList</title>
 </head>
 <body>
-    
+    <section id="todoApp">
+        <header id="header">
+            <h1>your TodoVerse</h1>
+        </header>
+
+        <aside id="directories">
+            <nav id="nav">
+                <ul class="nav-ul">
+                    <li><span class="title active" data-id="home">Home</span> <span class="count countVisible">4</span></li>
+                    <li><span class="title" data-id="today">Today</span> <span class="count">2</span></li>
+                    <li><span class="title" data-id="thisweek">This Week</span> <span class="count countVisible">4</span></li>
+                    <li class="projects">
+                        <span>Projects</span>
+                        <ul class="projects-ul">
+                            <li><span class="title" data-id="gym">/Gym/</span> <span class="count">4</span></li>
+                            <li><span class="title" data-id="study">/Study/</span> <span class="count countVisible">7</span></li>
+                            <li><span class="title" data-id="work">/Work/</span> <span class="count">1</span></li>
+                        </ul>
+                    </li>
+                    <li class="notes">Notes</li>
+                </ul>
+                <button class="addTodo"><i class="fas fa-plus"></i></button>
+            </nav>
+        </aside>
+
+        <main id="todo-container">
+                <ul id="todo-list">
+                    <li class="todo priority-high">
+                        <input type="checkbox" id="todoStatus">
+                        <span class="todoTitle">learn react</span>
+
+                        <button class="getDetails">Details</button>
+                        <span class="dueDate">21.05.2021</span>
+                        <button class="editBtn"><i class="fas fa-edit"></i></button>
+                        <button class="removeBtn"><i class="fas fa-trash-alt"></i></button>
+                    </li>
+                </ul>
+        </main>
+
+        <div class="addNewItems-overlay">
+            <div class="addNewItemsContainer">
+                <header>
+                    <h3>Create a new...</h3>
+                    <button class="close-newItemsInput">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </header>
+                <div class="form-wrapper">
+                    <aside class="sidebar">
+                        <ul>
+                            <li class="active" data-addNew="create_new_todo">To Do</li>
+                            <li>Project</li>
+                            <li>Note</li>
+                        </ul>
+                    </aside>
+                    <section class="all-inputs">
+                        <div class="create_new_todo">
+                            <form>
+                                <input type="text" class="create_new_todo_title" placeholder="Title: Pay bills">
+                                <textarea cols="30" rows="10" class="create_new_todo_details" placeholder="Details: e.g internet, phone, rent." style="resize: none;"></textarea>
+                                <div class="create_new_todo_dueDate">
+                                    <label for="dueDateEl">Due Date:</label>
+                                    <input type="date" id="create_new_todo_dueDate">
+                                </div>
+                                <div class="priority-submit-wrapper">
+                                    <div class="new_priority">
+                                        <p class="prio-title">Priority: </p>
+                                        <span class="new_priority-green" data-priority="low">Low</span>
+                                        <span class="new_priority-yellow" data-priority="medium">Medium</span>
+                                        <span class="new_priority-red" data-priority="high">High</span>
+                                    </div>
+                                    <button type="submit" class="submit_new_todo">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- <div class="create_new_project"></div>
+                        <div class="create_new_note"></div> -->
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-overlay">
+            <div class="show-details">
+                <h4>Title</h4>
+                <ul>
+                    <li>Project: Home</li>
+                    <li>Priority: High</li>
+                    <li>Due Date: 20.03.2021</li>
+                    <li>Details:</li>
+                </ul>
+                <button class="close-details">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </section>
     <script src="main.js"></script>
 </body>
 </html>
