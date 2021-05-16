@@ -1,0 +1,24 @@
+{
+  "name": "TodoList_JS_Project",
+  "version": "1.0.0",
+  "description": "Languages and Tools used: - HTML - CSS - Javascript - Git - Github - npm - webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceddah/TodoList_JS_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceddah/TodoList_JS_Project/issues"
+  },
+  "homepage": "https://github.com/ceddah/TodoList_JS_Project#readme",
+  "devDependencies": {
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0"
+  }
+}
