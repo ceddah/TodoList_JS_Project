@@ -1,1 +1,4 @@
-console.log('webpack working.123.')
+import './styles/style.css';
+
+
+console.log('webpack working.125.')
