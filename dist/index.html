@@ -62,12 +62,12 @@
                     <aside class="sidebar">
                         <ul>
                             <li class="active" data-addNew="create_new_todo">To Do</li>
-                            <li>Project</li>
-                            <li>Note</li>
+                            <li data-addNew="create_new_project">Project</li>
+                            <li data-addNew="create_new_note">Note</li>
                         </ul>
                     </aside>
                     <section class="all-inputs">
-                        <div class="create_new_todo">
+                        <div class="create_new_todo display-InputTab">
                             <form>
                                 <input type="text" class="create_new_todo_title" placeholder="Title: Pay bills">
                                 <textarea cols="30" rows="10" class="create_new_todo_details" placeholder="Details: e.g internet, phone, rent." style="resize: none;"></textarea>
@@ -86,8 +86,21 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- <div class="create_new_project"></div>
-                        <div class="create_new_note"></div> -->
+
+                        <div class="create_new_project">
+                            <form>
+                                <input type="text" id="create_new_project_title" placeholder="Title: House Renovation">
+                                <button type="submit" class="submit_new_project">Create Project</button>
+                            </form>
+                        </div>
+
+                        <div class="create_new_note">
+                            <form>
+                                <input type="text" id="create_new_note_title" placeholder="Title: ">
+                                <textarea cols="30" rows="10" class="create_new_note_details" placeholder="Details:" style="resize: none;"></textarea>
+                                <button type="submit" class="submit_new_note">Create Note</button>
+                            </form>
+                        </div>
                     </section>
                 </div>
             </div>
