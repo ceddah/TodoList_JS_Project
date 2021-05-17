@@ -69,11 +69,19 @@
                     <section class="all-inputs">
                         <div class="create_new_todo display-InputTab" id="create_new_todo">
                             <form>
-                                <input type="text" class="create_new_todo_title" placeholder="Title: Pay bills">
+                                <input type="text" class="create_new_todo_title" placeholder="Title: Pay bills" required>
                                 <textarea cols="30" rows="10" class="create_new_todo_details" placeholder="Details: e.g internet, phone, rent." style="resize: none;"></textarea>
                                 <div class="create_new_todo_dueDate">
-                                    <label for="dueDateEl">Due Date:</label>
-                                    <input type="date" id="create_new_todo_dueDate">
+                                    <label for="create_new_todo_dueDate">Due Date:</label>
+                                    <input type="date" id="create_new_todo_dueDate" required>
+
+                                    <label for="selectedProject">Project: </label>
+                                    <select id="selectedProject">
+                                        <option value="home">None</option>
+                                        <option value="gym">Gym</option>
+                                        <option value="study">Study</option>
+                                        <option value="work">Work</option>
+                                    </select>
                                 </div>
                                 <div class="priority-submit-wrapper">
                                     <div class="new_priority">
