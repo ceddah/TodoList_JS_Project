@@ -61,13 +61,13 @@
                 <div class="form-wrapper">
                     <aside class="sidebar">
                         <ul>
-                            <li class="active" data-addNew="create_new_todo">To Do</li>
-                            <li data-addNew="create_new_project">Project</li>
-                            <li data-addNew="create_new_note">Note</li>
+                            <li class="sidebar-btn active" data-addNew="create_new_todo">To Do</li>
+                            <li class="sidebar-btn" data-addNew="create_new_project">Project</li>
+                            <li class="sidebar-btn" data-addNew="create_new_note">Note</li>
                         </ul>
                     </aside>
                     <section class="all-inputs">
-                        <div class="create_new_todo display-InputTab">
+                        <div class="create_new_todo display-InputTab" id="create_new_todo">
                             <form>
                                 <input type="text" class="create_new_todo_title" placeholder="Title: Pay bills">
                                 <textarea cols="30" rows="10" class="create_new_todo_details" placeholder="Details: e.g internet, phone, rent." style="resize: none;"></textarea>
@@ -78,23 +78,23 @@
                                 <div class="priority-submit-wrapper">
                                     <div class="new_priority">
                                         <p class="prio-title">Priority: </p>
-                                        <span class="new_priority-green" data-priority="low">Low</span>
-                                        <span class="new_priority-yellow" data-priority="medium">Medium</span>
-                                        <span class="new_priority-red" data-priority="high">High</span>
+                                        <span class="new_priorityBtn new_priority-green" data-priority="low">Low</span>
+                                        <span class="new_priorityBtn new_priority-yellow" data-priority="medium">Medium</span>
+                                        <span class="new_priorityBtn new_priority-red" data-priority="high">High</span>
                                     </div>
                                     <button type="submit" class="submit_new_todo">Submit</button>
                                 </div>
                             </form>
                         </div>
 
-                        <div class="create_new_project">
+                        <div class="create_new_project" id="create_new_project">
                             <form>
                                 <input type="text" id="create_new_project_title" placeholder="Title: House Renovation">
                                 <button type="submit" class="submit_new_project">Create Project</button>
                             </form>
                         </div>
 
-                        <div class="create_new_note">
+                        <div class="create_new_note" id="create_new_note">
                             <form>
                                 <input type="text" id="create_new_note_title" placeholder="Title: ">
                                 <textarea cols="30" rows="10" class="create_new_note_details" placeholder="Details:" style="resize: none;"></textarea>
