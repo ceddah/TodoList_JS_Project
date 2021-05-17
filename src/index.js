@@ -35,19 +35,30 @@ const Controller = (() => {
     const todoTitleInput = document.querySelector('.create_new_todo_title');
     const todoDetailsInput = document.querySelector('.create_new_todo_details');
     const todoDueDateInput = document.getElementById('create_new_todo_dueDate');
-
+    const selectedProjectInput = document.getElementById('selectedProject');
+    
+    const resetAllInputs = () => {
+        const allPriorityBtns = document.querySelectorAll('.new_priorityBtn');
+        allPriorityBtns.forEach(btn => btn.classList.remove('priority-active'));
+        todoTitleInput.value = '';
+        todoDetailsInput.value = '';
+        todoDueDateInput.value = '';
+        selectedProjectInput.value = 'home';
+    }
 
     const addNewTodo = (e) => {
         e.preventDefault();
         const todoTitle = todoTitleInput.value;
         const todoDetails = todoDetailsInput.value;
         const todoDueDate =  todoDueDateInput.value;
+        const forProject = selectedProjectInput.value;
         const priority = document.querySelector('.priority-active') ? document.querySelector('.priority-active').dataset.priority : 'low';
         const todoId = new Date().getTime();
 
-        if(!editFlag)
-        manageTodos.setTodos('learn react', 'by the next month', '25-06-2021', 'medium', '', 4123123212, true);
+        if(!editFlag && todoTitle !== '' && todoDueDate !== '')
+        manageTodos.setTodos(todoTitle, todoDetails, todoDueDate, priority, forProject, todoId, false);
         console.log(manageTodos.todos);
+        resetAllInputs();
     }
 
     newTodoForm.addEventListener('submit', addNewTodo);

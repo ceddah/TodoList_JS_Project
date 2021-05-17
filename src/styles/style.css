@@ -479,9 +479,19 @@ body {
     border: 1px solid var(--border-green);
     padding: 5px;
     border-radius: 4px;
-    margin-left: 0.6rem;
+    margin: 0 1rem 0 0.6rem;
     font-size: 12px;
     outline: none;
+}
+
+.create_new_todo form .create_new_todo_dueDate select {
+    margin-left: 0.6rem;
+    border: 1px solid var(--border-green);
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    outline: none;
+    background-color: #fff;
 }
 
 .form-wrapper .all-inputs .create_new_todo form .priority-submit-wrapper {

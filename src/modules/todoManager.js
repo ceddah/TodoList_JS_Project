@@ -1,7 +1,9 @@
 export const manageTodos = (() => {
     const todos = {
         "home": [],
-        "gym": []
+        "gym": [],
+        "study": [],
+        "work": [],
     }
 
     const TODO = (title, desc, dueDate, priority, project = 'home', id, finished = false ) => {
@@ -16,12 +18,15 @@ export const manageTodos = (() => {
 
     const setTodos = (...inputs) => {
        const newTodo = TODO(...inputs);
+       const project = inputs[4];
        todos.home.push(newTodo);
+       todos[project].push(newTodo);
     }
-    //We need to create one big array of all todos in obj, which we will use to display all and to sort by date
+
     const displayTodos = (arr) => {
         //Maybe by default it should take all keys in todos and spread it into one big array [...todo.keys[]]
         console.log('display todos');
+        const todoListUL = document.querySelector('.todo-list');
     }
 
     const editTodos = () => {
