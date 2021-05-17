@@ -10,6 +10,7 @@ const syncUI = (() => {
     const addButton = document.querySelector('.addTodo');
     const formOverlay = document.querySelector('.addNewItems-overlay');
     const closeFormOverlay = document.querySelector('.close-newItemsInput');
+    const closeDetailsOverlay = document.querySelector('.close-details');
     const formWrapper = document.querySelector('.form-wrapper');
 
     const switchTabs = (e) => {
@@ -28,7 +29,7 @@ const syncUI = (() => {
     titles.forEach(title => title.addEventListener('click', switchTabs));
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
     closeFormOverlay.addEventListener('click', () => formOverlay.classList.remove('addNewItemsActive'));
-
+    closeDetailsOverlay.addEventListener('click', () => document.querySelector('.details-overlay').classList.remove('details-active'));
     return { formOverlay }
 })();
 
@@ -42,6 +43,8 @@ const Controller = (() => {
     const todoDueDateInput = document.getElementById('create_new_todo_dueDate');
     const selectedProjectInput = document.getElementById('selectedProject');
     const todoListUL = document.getElementById('todo-list');
+    const detailsOverlay = document.querySelector('.details-overlay');
+    const detailsEl = document.querySelector('.details-info');
     
     const resetAllInputs = () => {
         const allPriorityBtns = document.querySelectorAll('.new_priorityBtn');
@@ -84,7 +87,7 @@ const Controller = (() => {
             manageTodos.removeTodos(id);
         } else if(e.target.classList.contains('editBtn')) {
             editFlag = true;
-            editElement = manageTodos.getEditTodo(id);
+            editElement = manageTodos.getTodo(id);
             syncUI.formOverlay.classList.add('addNewItemsActive');
             todoTitleInput.value = editElement.title;
             todoDetailsInput.value = editElement.desc;
@@ -92,6 +95,18 @@ const Controller = (() => {
             selectedProjectInput.value = editElement.project;
             const priority = document.querySelector(`[data-priority=${editElement.priority}]`);
             priority.classList.add('priority-active');
+        } else if(e.target.classList.contains('getDetails')) {
+            detailsOverlay.classList.add('details-active');
+            const getItem = manageTodos.getTodo(id);
+            detailsEl.innerHTML = `
+                <h4>${getItem.title}</h4>
+                <ul>
+                    <li>Project: ${getItem.project.charAt(0).toUpperCase() + getItem.project.slice(1)}</li>
+                    <li>Priority: ${getItem.priority.charAt(0).toUpperCase() + getItem.priority.slice(1)}</li>
+                    <li>Due Date: ${getItem.dueDate}</li>
+                    <li>Details: ${getItem.desc}</li>
+                </ul>
+            `;
         }
     })
 })()

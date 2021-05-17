@@ -45,9 +45,9 @@ export const manageTodos = (() => {
         }).join('');
     }
 
-    const getEditTodo = (id) => {
-        const editTodo = todos.filter(todo => todo.id === Number(id))[0];
-        return editTodo;
+    const getTodo = (id) => {
+        const Todo = todos.filter(todo => todo.id === Number(id))[0];
+        return Todo;
     }
 
     const editTodos = (...inputs) => {
@@ -71,5 +71,5 @@ export const manageTodos = (() => {
         console.log('furnitute')
     }
     //remove todos from return when we finish
-    return { setTodos, displayTodos, editTodos, removeTodos, getEditTodo, todos }
+    return { setTodos, displayTodos, editTodos, removeTodos, getTodo, todos }
 })()

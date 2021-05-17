@@ -305,7 +305,7 @@ body {
 }
 
 #todoApp .details-overlay.details-active {
-    display: flex;;
+    display: flex;
 }
 
 #todoApp .details-overlay .show-details {
