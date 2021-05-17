@@ -1,6 +1,14 @@
 export const manageTodos = (() => {
     const todos = {
-        "home": [],
+        "home": [{
+            title: 'Learn React',
+            desc: '',
+            dueDate: '25-06-2021',
+            priority: 'medium',
+            project: 'home',
+            id: 23121313112,
+            finished: false
+        }],
         "gym": [],
         "study": [],
         "work": [],
@@ -31,7 +39,7 @@ export const manageTodos = (() => {
         todoListUL.innerHTML = '';
         todoListUL.innerHTML = todos[arr].map(todo => {
             return `
-            <li class="todo priority-${todo.priority}">
+            <li class="todo priority-${todo.priority}" id="${todo.id}">
                 <input type="checkbox" id="todoStatus" ${todo.finished === true ? 'checked' : ''}>
                 <span class="todoTitle">${todo.title}</span>
 
@@ -42,15 +50,14 @@ export const manageTodos = (() => {
             </li>
             `
         }).join('');
-        console.log(todos[arr]);
     }
 
     const editTodos = () => {
         console.log('edit todos');
     }
 
-    const removeTodos = () => {
-        console.log('remove todos');
+    const removeTodos = (id) => {
+        console.log(id);
     } 
 
     const createNewProject = () => {
@@ -58,5 +65,5 @@ export const manageTodos = (() => {
         console.log('furnitute')
     }
     //remove todos from return when we finish
-    return { setTodos, displayTodos, todos }
+    return { setTodos, displayTodos, editTodos, removeTodos, todos }
 })()

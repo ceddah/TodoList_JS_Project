@@ -21,6 +21,9 @@ const syncUI = (() => {
 
     //This func managed openning and closing input forms and their respective tabs/categories.
     manageInputs(formWrapper);
+    
+    //Displaying todos when we first load the page
+    manageTodos.displayTodos();
 
     titles.forEach(title => title.addEventListener('click', switchTabs));
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
@@ -36,6 +39,7 @@ const Controller = (() => {
     const todoDetailsInput = document.querySelector('.create_new_todo_details');
     const todoDueDateInput = document.getElementById('create_new_todo_dueDate');
     const selectedProjectInput = document.getElementById('selectedProject');
+    const todoListUL = document.getElementById('todo-list');
     
     const resetAllInputs = () => {
         const allPriorityBtns = document.querySelectorAll('.new_priorityBtn');
@@ -64,6 +68,14 @@ const Controller = (() => {
     }
 
     newTodoForm.addEventListener('submit', addNewTodo);
+
+    //Listenening for Edit,Remove, Get Details Buttons
+    todoListUL.addEventListener('click', (e) => {
+        if(e.target.classList.contains('removeBtn')) {
+            const id = e.target.parentElement.id;
+            manageTodos.removeTodos(id);
+        }
+    })
 })()
 
 
