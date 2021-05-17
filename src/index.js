@@ -28,6 +28,8 @@ const syncUI = (() => {
     titles.forEach(title => title.addEventListener('click', switchTabs));
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
     closeFormOverlay.addEventListener('click', () => formOverlay.classList.remove('addNewItemsActive'));
+
+    return { formOverlay }
 })();
 
 const Controller = (() => {
@@ -59,21 +61,37 @@ const Controller = (() => {
         const priority = document.querySelector('.priority-active') ? document.querySelector('.priority-active').dataset.priority : 'low';
         const todoId = new Date().getTime();
 
-        if(!editFlag && todoTitle !== '' && todoDueDate !== '')
+        if(!editFlag && todoTitle !== '' && todoDueDate !== '') {
         manageTodos.setTodos(todoTitle, todoDetails, todoDueDate, priority, forProject, todoId, false);
         console.log(manageTodos.todos);
         //If no Params are passed it will display home/all by default.
         manageTodos.displayTodos();
         resetAllInputs();
+        } else if(editFlag && todoTitle !== '' && todoDueDate !== '') {
+            manageTodos.editTodos(todoTitle, todoDetails, todoDueDate, priority, forProject, editElement.id, false);
+            editFlag = false;
+            editElement = undefined;
+            resetAllInputs();
+        }
     }
 
     newTodoForm.addEventListener('submit', addNewTodo);
 
     //Listenening for Edit,Remove, Get Details Buttons
     todoListUL.addEventListener('click', (e) => {
+        const id = e.target.parentElement.id;
         if(e.target.classList.contains('removeBtn')) {
-            const id = e.target.parentElement.id;
             manageTodos.removeTodos(id);
+        } else if(e.target.classList.contains('editBtn')) {
+            editFlag = true;
+            editElement = manageTodos.getEditTodo(id);
+            syncUI.formOverlay.classList.add('addNewItemsActive');
+            todoTitleInput.value = editElement.title;
+            todoDetailsInput.value = editElement.desc;
+            todoDueDateInput.value = editElement.dueDate;
+            selectedProjectInput.value = editElement.project;
+            const priority = document.querySelector(`[data-priority=${editElement.priority}]`);
+            priority.classList.add('priority-active');
         }
     })
 })()
