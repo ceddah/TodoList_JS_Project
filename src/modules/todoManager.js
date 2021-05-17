@@ -43,6 +43,7 @@ export const manageTodos = (() => {
        const newTodo = TODO(...inputs);
        todos.push(newTodo);
     }
+
     //Every Time display is called we should display quantity of items in count element
     const displayTodos = (arr = todos) => {
         const todoListUL = document.getElementById('todo-list');
@@ -60,6 +61,23 @@ export const manageTodos = (() => {
             </li>
             `
         }).join('');
+
+        const titles = document.querySelectorAll('.nav-ul .title');
+        titles.forEach(title => {
+            const checkFor = title.dataset.id;
+            const spanEl = title.nextElementSibling;
+            const spanCount = todos.filter(todo => todo.project == checkFor).length;
+            switch(checkFor) {
+                case 'home':
+                    todos.length > 0 ? spanEl.classList.add('countVisible') : spanEl.classList.remove('countVisible');
+                    spanEl.textContent = todos.length;
+                    break;
+                default: 
+                    spanCount > 0 ? spanEl.classList.add('countVisible') : spanEl.classList.remove('countVisible');
+                    spanEl.textContent = spanCount;
+                    break;
+            }
+        })
     }
 
     const getTodo = (id) => {

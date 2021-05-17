@@ -17,13 +17,16 @@ const syncUI = (() => {
         titles.forEach(title => title.classList.remove('active'));
         e.currentTarget.classList.add('active');
         const data = e.currentTarget.dataset.id;
-        const todos = manageTodos.todos.filter(todo => todo.project == data);
+        const allTodos = manageTodos.todos;
+        console.log(allTodos);
+        let filteredTodos = allTodos.filter(todo => todo.project == data);
         if(data == 'home') {
             manageTodos.displayTodos();
         } else {
-            manageTodos.displayTodos(todos);
+            manageTodos.displayTodos(filteredTodos);
+            // console.log(todos);
         }
-        //Here goes function for generating todos for specific data type/category
+        console.log(filteredTodos);
     }
 
     //This func managed openning and closing input forms and their respective tabs/categories.
@@ -36,7 +39,7 @@ const syncUI = (() => {
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
     closeFormOverlay.addEventListener('click', () => formOverlay.classList.remove('addNewItemsActive'));
     closeDetailsOverlay.addEventListener('click', () => document.querySelector('.details-overlay').classList.remove('details-active'));
-    return { formOverlay }
+    return { formOverlay, closeFormOverlay }
 })();
 
 const Controller = (() => {
@@ -51,6 +54,7 @@ const Controller = (() => {
     const todoListUL = document.getElementById('todo-list');
     const detailsOverlay = document.querySelector('.details-overlay');
     const detailsEl = document.querySelector('.details-info');
+    const submitTodoBtn = document.querySelector('.submit_new_todo');
     
     const resetAllInputs = () => {
         const allPriorityBtns = document.querySelectorAll('.new_priorityBtn');
@@ -59,6 +63,7 @@ const Controller = (() => {
         todoDetailsInput.value = '';
         todoDueDateInput.value = '';
         selectedProjectInput.value = 'home';
+        submitTodoBtn.textContent = 'Submit';
     }
 
     const addNewTodo = (e) => {
@@ -85,6 +90,7 @@ const Controller = (() => {
     }
 
     newTodoForm.addEventListener('submit', addNewTodo);
+    syncUI.closeFormOverlay.addEventListener('click', resetAllInputs);
 
     //Listenening for Edit,Remove, Get Details Buttons
     todoListUL.addEventListener('click', (e) => {
@@ -101,6 +107,7 @@ const Controller = (() => {
             selectedProjectInput.value = editElement.project;
             const priority = document.querySelector(`[data-priority=${editElement.priority}]`);
             priority.classList.add('priority-active');
+            submitTodoBtn.textContent = 'Edit ToDo';
         } else if(e.target.classList.contains('getDetails')) {
             detailsOverlay.classList.add('details-active');
             const getItem = manageTodos.getTodo(id);
@@ -118,6 +125,8 @@ const Controller = (() => {
             getItem.finished = e.target.checked;
         }
     })
+
+    return { resetAllInputs }
 })()
 
 
