@@ -19,14 +19,30 @@ export const manageTodos = (() => {
     const setTodos = (...inputs) => {
        const newTodo = TODO(...inputs);
        const project = inputs[4];
-       todos.home.push(newTodo);
+       if(project !== 'home') {
+        todos.home.push(newTodo);
+       }
        todos[project].push(newTodo);
     }
 
-    const displayTodos = (arr) => {
+    const displayTodos = (arr = 'home') => {
         //Maybe by default it should take all keys in todos and spread it into one big array [...todo.keys[]]
-        console.log('display todos');
-        const todoListUL = document.querySelector('.todo-list');
+        const todoListUL = document.getElementById('todo-list');
+        todoListUL.innerHTML = '';
+        todoListUL.innerHTML = todos[arr].map(todo => {
+            return `
+            <li class="todo priority-${todo.priority}">
+                <input type="checkbox" id="todoStatus" ${todo.finished === true ? 'checked' : ''}>
+                <span class="todoTitle">${todo.title}</span>
+
+                <button class="getDetails">Details</button>
+                <span class="dueDate">${todo.dueDate}</span>
+                <button class="editBtn"><i class="fas fa-edit"></i></button>
+                <button class="removeBtn"><i class="fas fa-trash-alt"></i></button>
+            </li>
+            `
+        }).join('');
+        console.log(todos[arr]);
     }
 
     const editTodos = () => {
@@ -41,6 +57,6 @@ export const manageTodos = (() => {
         //Append new key to todos obj e.g. "Furniture: []"
         console.log('furnitute')
     }
-
-    return { setTodos, todos }
+    //remove todos from return when we finish
+    return { setTodos, displayTodos, todos }
 })()
