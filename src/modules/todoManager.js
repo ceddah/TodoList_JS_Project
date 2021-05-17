@@ -8,6 +8,24 @@ export const manageTodos = (() => {
             project: 'home',
             id: 23121313112,
             finished: false
+        },
+        {
+            title: 'Practice on Exercism',
+            desc: '',
+            dueDate: '2021-12-06',
+            priority: 'low',
+            project: 'study',
+            id: 23121313213,
+            finished: false
+        },
+        {
+            title: 'Finish Room Decorations',
+            desc: '',
+            dueDate: '2021-05-02',
+            priority: 'high',
+            project: 'work',
+            id: 12381313112,
+            finished: false
         }
     ]
 
@@ -25,15 +43,14 @@ export const manageTodos = (() => {
        const newTodo = TODO(...inputs);
        todos.push(newTodo);
     }
-
+    //Every Time display is called we should display quantity of items in count element
     const displayTodos = (arr = todos) => {
-        //Maybe by default it should take all keys in todos and spread it into one big array [...todo.keys[]]
         const todoListUL = document.getElementById('todo-list');
         todoListUL.innerHTML = '';
         todoListUL.innerHTML = arr.map(todo => {
             return `
             <li class="todo priority-${todo.priority}" id="${todo.id}">
-                <input type="checkbox" id="todoStatus" ${todo.finished === true ? 'checked' : ''}>
+                <input type="checkbox" class="todoStatus" ${todo.finished === true ? 'checked' : ''}>
                 <span class="todoTitle">${todo.title}</span>
 
                 <button class="getDetails">Details</button>

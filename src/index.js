@@ -17,6 +17,12 @@ const syncUI = (() => {
         titles.forEach(title => title.classList.remove('active'));
         e.currentTarget.classList.add('active');
         const data = e.currentTarget.dataset.id;
+        const todos = manageTodos.todos.filter(todo => todo.project == data);
+        if(data == 'home') {
+            manageTodos.displayTodos();
+        } else {
+            manageTodos.displayTodos(todos);
+        }
         //Here goes function for generating todos for specific data type/category
     }
 
@@ -107,6 +113,9 @@ const Controller = (() => {
                     <li>Details: ${getItem.desc}</li>
                 </ul>
             `;
+        } else if(e.target.classList.contains('todoStatus')) {
+            const getItem = manageTodos.getTodo(id);
+            getItem.finished = e.target.checked;
         }
     })
 })()
