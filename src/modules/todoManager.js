@@ -99,6 +99,7 @@ export const manageTodos = (() => {
     const removeTodos = (id) => {
         todos = todos.filter(todo => todo.id !== Number(id));
         displayTodos();
+        console.log(todos);
     } 
 
     const createNewProject = () => {

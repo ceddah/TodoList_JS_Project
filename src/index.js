@@ -18,13 +18,12 @@ const syncUI = (() => {
         e.currentTarget.classList.add('active');
         const data = e.currentTarget.dataset.id;
         const allTodos = manageTodos.todos;
-        console.log(allTodos);
+
         let filteredTodos = allTodos.filter(todo => todo.project == data);
         if(data == 'home') {
             manageTodos.displayTodos();
         } else {
             manageTodos.displayTodos(filteredTodos);
-            // console.log(todos);
         }
         console.log(filteredTodos);
     }
