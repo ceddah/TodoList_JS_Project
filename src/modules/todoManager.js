@@ -63,7 +63,7 @@ export const manageTodos = (() => {
         })
     }
 
-    const updateActiveTitle = () => {
+    const displayByActiveTitle = () => {
         let activeTitle;
         titles.forEach(title => {
             if(title.classList.contains('active')) {
@@ -120,18 +120,12 @@ export const manageTodos = (() => {
         toEditElem.dueDate = inputs[2];
         toEditElem.priority = inputs[3];
         toEditElem.project = inputs[4];
-        displayTodos();
-
-        titles.forEach(title => title.classList.remove('active'));
-        titles[0].classList.add('active');
+        displayTodos(displayByActiveTitle());
     }
 
     const removeTodos = (id) => {
         todos = todos.filter(todo => todo.id !== Number(id));
-        displayTodos(updateActiveTitle());
-        updateActiveTitle();
-        // titles.forEach(title => title.classList.remove('active'));
-        // titles[0].classList.add('active');
+        displayTodos(displayByActiveTitle());
         //HERE should go logic for deleting project if its empty
     } 
 
@@ -140,5 +134,5 @@ export const manageTodos = (() => {
         console.log('furnitute')
     }
     //remove todos from return when we finish
-    return { setTodos, displayTodos, editTodos, removeTodos, getTodo, todos, getAllTodos }
+    return { setTodos, displayTodos, editTodos, removeTodos, getTodo, todos, getAllTodos, displayByActiveTitle }
 })()

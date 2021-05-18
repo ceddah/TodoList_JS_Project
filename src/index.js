@@ -75,9 +75,8 @@ const Controller = (() => {
 
         if(!editFlag && todoTitle !== '' && todoDueDate !== '') {
         manageTodos.setTodos(todoTitle, todoDetails, todoDueDate, priority, forProject, todoId, false);
-        console.log(manageTodos.todos);
         //If no Params are passed it will display home/all by default.
-        manageTodos.displayTodos();
+        manageTodos.displayTodos(manageTodos.displayByActiveTitle());
         resetAllInputs();
         } else if(editFlag && todoTitle !== '' && todoDueDate !== '') {
             manageTodos.editTodos(todoTitle, todoDetails, todoDueDate, priority, forProject, editElement.id, false);
