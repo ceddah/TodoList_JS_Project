@@ -223,7 +223,6 @@ export const manageTodos = (() => {
             editTodos, 
             removeTodos, 
             getTodo, 
-            todoData, 
             getAllTodos, 
             displayByActiveTitle,
             getProjects,

@@ -138,6 +138,7 @@ const Controller = (() => {
             `
         }).join('');
     }
+    updateProjectOptions();
 
     const addNewProject = (e) => {
         e.preventDefault();
