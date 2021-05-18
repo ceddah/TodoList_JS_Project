@@ -1,13 +1,33 @@
 export const manageTodos = (() => {
-    let todoData = {
+    const savedTodos = JSON.parse(localStorage.getItem('todos'));
+
+    const tempData =  {
         "todos": [
             {
                 title: 'Learn React',
                 desc: '',
                 dueDate: '2021-05-19',
-                priority: 'medium',
-                project: 'home',
+                priority: 'high',
+                project: 'study',
                 id: 23121313112,
+                finished: false
+            },
+            {
+                title: 'Get in Shape',
+                desc: '',
+                dueDate: '2021-08-19',
+                priority: 'medium',
+                project: 'gym',
+                id: 83141366612,
+                finished: false
+            },
+            {
+                title: 'Finish Odin Project',
+                desc: '',
+                dueDate: '2021-06-19',
+                priority: 'medium',
+                project: 'study',
+                id: 25555113112,
                 finished: false
             },
             {
@@ -17,21 +37,41 @@ export const manageTodos = (() => {
                 priority: 'low',
                 project: 'study',
                 id: 23121313213,
-                finished: false
+                finished: true
             },
             {
                 title: 'Finish Room Decorations',
                 desc: '',
-                dueDate: '2021-05-02',
+                dueDate: '2021-10-22',
                 priority: 'high',
-                project: 'work',
+                project: 'home',
                 id: 12381313112,
+                finished: false
+            },
+            {
+                title: 'Complete the Assignments',
+                desc: '',
+                dueDate: '2021-07-13',
+                priority: 'medium',
+                project: 'work',
+                id: 12389999119,
+                finished: true
+            },
+            {
+                title: 'Learn Handstand',
+                desc: '',
+                dueDate: '2021-08-02',
+                priority: 'low',
+                project: 'gym',
+                id: 12389994444,
                 finished: false
             }
         ],
         "projects": ['gym', 'study', 'work'],
         "notes": []
     }
+
+    let todoData = savedTodos !== null ? savedTodos : tempData;
 
     const TODO = (title, desc, dueDate, priority, project = 'home', id, finished = false ) => {
         return {title, 
@@ -41,7 +81,12 @@ export const manageTodos = (() => {
                 project, 
                 id, 
                 finished};
-        }
+    }
+        
+
+    const saveToLocalStorage = () => {
+        localStorage.setItem('todos', JSON.stringify(todoData));
+    }
 
     const setTodos = (...inputs) => {
        const newTodo = TODO(...inputs);
@@ -105,7 +150,7 @@ export const manageTodos = (() => {
             `
         }).join('');
         updateTodoCount();
-        console.log(todoData);
+        saveToLocalStorage();
     }
 
     const getTodo = (id) => {
@@ -162,6 +207,7 @@ export const manageTodos = (() => {
         projectsUl.innerHTML = todoData.projects.map(project => {
             return `<li><span class="title" data-id="${project}">/${project.charAt(0).toUpperCase() + project.slice(1)}/</span> <span class="count">0</span></li>`
         }).join('');
+        saveToLocalStorage();
     }
 
     const setNewProject = (title) => {

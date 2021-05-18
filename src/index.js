@@ -63,7 +63,7 @@ const syncUI = (() => {
     manageInputs(formWrapper);
     
     //Displaying todos when we first load the page
-    // manageTodos.displayTodos();
+    manageTodos.displayTodos();
 
     navUl.addEventListener('click', switchTabs);
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
@@ -72,6 +72,7 @@ const syncUI = (() => {
     return { formOverlay, closeFormOverlay }
 })();
 
+//Controlling the UI
 const Controller = (() => {
     let editFlag = false;
     let editElement = undefined;
@@ -161,6 +162,7 @@ const Controller = (() => {
         const id = e.target.parentElement.id;
         if(e.target.classList.contains('removeBtn')) {
             manageTodos.removeTodos(id);
+            updateProjectOptions();
         } else if(e.target.classList.contains('editBtn')) {
             editFlag = true;
             editElement = manageTodos.getTodo(id);
@@ -187,13 +189,9 @@ const Controller = (() => {
         } else if(e.target.classList.contains('todoStatus')) {
             const getItem = manageTodos.getTodo(id);
             getItem.finished = e.target.checked;
+            manageTodos.displayTodos(manageTodos.displayByActiveTitle());
         }
     })
 
     return { resetAllInputs }
 })()
-
-
-
-
-// There needs to be a logic to delete projects if they have 0 todos in them or display message remove project in that case
