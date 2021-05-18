@@ -16,8 +16,6 @@ const syncUI = (() => {
     //Displaying Project Tabs when we first load the page
     manageTodos.displayProjects();
 
-    //We need to call a function when switching tabs that wil check if ITS dataset project has 
-    //any length, if it does not display delete project message.
     const switchTabs = (e) => {
         const titles = document.querySelectorAll('.nav-ul .title');
         if(e.target.classList.contains('title')) {
@@ -61,11 +59,11 @@ const syncUI = (() => {
         }
     }
 
-    //This func managed openning and closing input forms and their respective tabs/categories.
+    //This func manage openning and closing input forms and their respective tabs/categories.
     manageInputs(formWrapper);
     
     //Displaying todos when we first load the page
-    manageTodos.displayTodos();
+    // manageTodos.displayTodos();
 
     navUl.addEventListener('click', switchTabs);
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
