@@ -13,6 +13,7 @@ const syncUI = (() => {
     const formWrapper = document.querySelector('.form-wrapper');
     const projectsUl = document.querySelector('.projects-ul');
 
+    //Displaying Project Tabs when we first load the page
     manageTodos.displayProjects(projectsUl);
 
     const switchTabs = (e) => {
@@ -39,9 +40,6 @@ const syncUI = (() => {
     //Displaying todos when we first load the page
     manageTodos.displayTodos();
 
-    //Maybe set timeout for this so we can load all tabs first...
-    //Maybe set timeout for this so we can load all tabs first...
-    //Maybe set timeout for this so we can load all tabs first...
     navUl.addEventListener('click', switchTabs);
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
     closeFormOverlay.addEventListener('click', () => formOverlay.classList.remove('addNewItemsActive'));
