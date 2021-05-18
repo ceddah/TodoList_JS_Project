@@ -6,19 +6,22 @@ console.log('webpack working.1235.');
 //On Click, visual stuff.
 const syncUI = (() => {
     const navUl = document.querySelector('.nav-ul');
-    const titles = document.querySelectorAll('.nav-ul .title');
     const addButton = document.querySelector('.addTodo');
     const formOverlay = document.querySelector('.addNewItems-overlay');
     const closeFormOverlay = document.querySelector('.close-newItemsInput');
     const closeDetailsOverlay = document.querySelector('.close-details');
     const formWrapper = document.querySelector('.form-wrapper');
+    const projectsUl = document.querySelector('.projects-ul');
+
+    manageTodos.displayProjects(projectsUl);
 
     const switchTabs = (e) => {
+        const titles = document.querySelectorAll('.nav-ul .title');
         if(e.target.classList.contains('title')) {
             titles.forEach(title => title.classList.remove('active'));
+            console.log(titles);
             e.target.classList.add('active');
             const data = e.target.dataset.id;
-            console.log(data);
             const allTodos = manageTodos.getAllTodos();
             let filteredTodos = allTodos.filter(todo => todo.project == data);
 

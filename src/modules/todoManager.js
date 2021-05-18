@@ -48,9 +48,8 @@ export const manageTodos = (() => {
        todoData.todos.push(newTodo);
     }
 
-    const titles = document.querySelectorAll('.nav-ul .title');
-
     const updateTodoCount = () => {
+        const titles = document.querySelectorAll('.nav-ul .title');
         titles.forEach(title => {
             const checkFor = title.dataset.id;
             const spanEl = title.nextElementSibling;
@@ -69,6 +68,7 @@ export const manageTodos = (() => {
     }
 
     const displayByActiveTitle = () => {
+        const titles = document.querySelectorAll('.nav-ul .title');
         let activeTitle;
         titles.forEach(title => {
             if(title.classList.contains('active')) {
@@ -136,7 +136,6 @@ export const manageTodos = (() => {
     } 
 
     // Managing Projects
-    const projectsUl = document.querySelector('.projects-ul');
 
     const getProjects = () => {
         return todoData.projects;
@@ -148,7 +147,10 @@ export const manageTodos = (() => {
     }
 
     const displayProjects = (ul) => {
-        //dassa
+        ul.innerHTML = '';
+        ul.innerHTML = todoData.projects.map(project => {
+            return `<li><span class="title" data-id="${project}">/${project.charAt(0).toUpperCase() + project.slice(1)}/</span> <span class="count">0</span></li>`
+        }).join('');
     }
     //remove todos from return when we finish
     return { setTodos, 
