@@ -29,7 +29,7 @@ export const manageTodos = (() => {
                 finished: false
             }
         ],
-        "projects": ['Gym', 'Study', 'Work'],
+        "projects": ['gym', 'study', 'work'],
         "notes": []
     }
 
@@ -47,6 +47,7 @@ export const manageTodos = (() => {
        const newTodo = TODO(...inputs);
        todoData.todos.push(newTodo);
     }
+
     const titles = document.querySelectorAll('.nav-ul .title');
 
     const updateTodoCount = () => {
@@ -105,6 +106,7 @@ export const manageTodos = (() => {
             `
         }).join('');
         updateTodoCount();
+        console.log(todoData);
     }
 
     const getTodo = (id) => {
@@ -133,10 +135,31 @@ export const manageTodos = (() => {
         //HERE should go logic for deleting project if its empty
     } 
 
-    const createNewProject = () => {
-        //Append new key to todos obj e.g. "Furniture: []"
-        console.log('furnitute')
+    // Managing Projects
+    const projectsUl = document.querySelector('.projects-ul');
+
+    const getProjects = () => {
+        return todoData.projects;
+    }
+
+    const setNewProject = (title) => {
+        todoData.projects.push(title);
+        console.log(todoData);
+    }
+
+    const displayProjects = (ul) => {
+        //dassa
     }
     //remove todos from return when we finish
-    return { setTodos, displayTodos, editTodos, removeTodos, getTodo, todoData, getAllTodos, displayByActiveTitle }
+    return { setTodos, 
+            displayTodos, 
+            editTodos, 
+            removeTodos, 
+            getTodo, 
+            todoData, 
+            getAllTodos, 
+            displayByActiveTitle,
+            getProjects,
+            setNewProject,
+            displayProjects }
 })()

@@ -3,7 +3,6 @@ import { manageInputs } from './modules/manageAllInputs.js';
 import { manageTodos } from './modules/todoManager.js';
 console.log('webpack working.1235.');
 
-
 //On Click, visual stuff.
 const syncUI = (() => {
     const titles = document.querySelectorAll('.nav-ul .title');
@@ -33,6 +32,9 @@ const syncUI = (() => {
     //Displaying todos when we first load the page
     manageTodos.displayTodos();
 
+    //Maybe set timeout for this so we can load all tabs first...
+    //Maybe set timeout for this so we can load all tabs first...
+    //Maybe set timeout for this so we can load all tabs first...
     titles.forEach(title => title.addEventListener('click', switchTabs));
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
     closeFormOverlay.addEventListener('click', () => formOverlay.classList.remove('addNewItemsActive'));
@@ -45,10 +47,12 @@ const Controller = (() => {
     let editElement = undefined;
 
     const newTodoForm = document.querySelector('.create_new_todo form');
+    const newProjectForm = document.querySelector('.create_new_project form');
     const todoTitleInput = document.querySelector('.create_new_todo_title');
     const todoDetailsInput = document.querySelector('.create_new_todo_details');
     const todoDueDateInput = document.getElementById('create_new_todo_dueDate');
     const selectedProjectInput = document.getElementById('selectedProject');
+    const newProjectTitleInput = document.getElementById('create_new_project_title');
     const todoListUL = document.getElementById('todo-list');
     const detailsOverlay = document.querySelector('.details-overlay');
     const detailsEl = document.querySelector('.details-info');
@@ -86,8 +90,15 @@ const Controller = (() => {
         }
     }
 
+    const addNewProject = (e) => {
+        e.preventDefault();
+        const newProjectTitle = newProjectTitleInput.value;
+        manageTodos.setNewProject(newProjectTitle);
+    }
+
     newTodoForm.addEventListener('submit', addNewTodo);
     syncUI.closeFormOverlay.addEventListener('click', resetAllInputs);
+    newProjectForm.addEventListener('submit', addNewProject);
 
     //Listenening for Edit,Remove, Get Details Buttons
     todoListUL.addEventListener('click', (e) => {
