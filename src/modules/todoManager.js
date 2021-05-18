@@ -44,6 +44,45 @@ export const manageTodos = (() => {
        todos.push(newTodo);
     }
     const titles = document.querySelectorAll('.nav-ul .title');
+
+    const updateTodoCount = () => {
+        titles.forEach(title => {
+            const checkFor = title.dataset.id;
+            const spanEl = title.nextElementSibling;
+            const spanCount = todos.filter(todo => todo.project == checkFor).length;
+            switch(checkFor) {
+                case 'home':
+                    todos.length > 0 ? spanEl.classList.add('countVisible') : spanEl.classList.remove('countVisible');
+                    spanEl.textContent = todos.length;
+                    break;
+                default: 
+                    spanCount > 0 ? spanEl.classList.add('countVisible') : spanEl.classList.remove('countVisible');
+                    spanEl.textContent = spanCount;
+                    break;
+            }
+        })
+    }
+
+    const updateActiveTitle = () => {
+        let activeTitle;
+        titles.forEach(title => {
+            if(title.classList.contains('active')) {
+                activeTitle = title;
+            }
+        })
+        const projectName = activeTitle.dataset.id;
+
+        const filteredTodosForTitle = todos.filter(todo => {
+            if(projectName == 'home') {
+                return todos;
+            } else {
+                return todo.project === projectName
+            }
+        });
+
+        return filteredTodosForTitle;
+    }
+
     //Every Time display is called we should display quantity of items in count element
     const displayTodos = (arr = todos) => {
         const todoListUL = document.getElementById('todo-list');
@@ -61,22 +100,7 @@ export const manageTodos = (() => {
             </li>
             `
         }).join('');
-
-        titles.forEach(title => {
-            const checkFor = title.dataset.id;
-            const spanEl = title.nextElementSibling;
-            const spanCount = todos.filter(todo => todo.project == checkFor).length;
-            switch(checkFor) {
-                case 'home':
-                    todos.length > 0 ? spanEl.classList.add('countVisible') : spanEl.classList.remove('countVisible');
-                    spanEl.textContent = todos.length;
-                    break;
-                default: 
-                    spanCount > 0 ? spanEl.classList.add('countVisible') : spanEl.classList.remove('countVisible');
-                    spanEl.textContent = spanCount;
-                    break;
-            }
-        })
+        updateTodoCount();
     }
 
     const getTodo = (id) => {
@@ -104,9 +128,10 @@ export const manageTodos = (() => {
 
     const removeTodos = (id) => {
         todos = todos.filter(todo => todo.id !== Number(id));
-        displayTodos();
-        titles.forEach(title => title.classList.remove('active'));
-        titles[0].classList.add('active');
+        displayTodos(updateActiveTitle());
+        updateActiveTitle();
+        // titles.forEach(title => title.classList.remove('active'));
+        // titles[0].classList.add('active');
         //HERE should go logic for deleting project if its empty
     } 
 

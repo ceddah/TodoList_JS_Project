@@ -1,7 +1,7 @@
 import './styles/style.css';
 import { manageInputs } from './modules/manageAllInputs.js';
 import { manageTodos } from './modules/todoManager.js';
-console.log('webpack working.1245.');
+console.log('webpack working.1235.');
 
 
 //On Click, visual stuff.
@@ -24,7 +24,6 @@ const syncUI = (() => {
             manageTodos.displayTodos();
         } else {
             manageTodos.displayTodos(filteredTodos);
-            console.log(filteredTodos)
         }
     }
 
