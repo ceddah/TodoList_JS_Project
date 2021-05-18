@@ -14,7 +14,6 @@ const syncUI = (() => {
     const projectsUl = document.querySelector('.projects-ul');
 
     //Displaying Project Tabs when we first load the page
-    // manageTodos.displayProjects(projectsUl);
     manageTodos.displayProjects();
 
     //We need to call a function when switching tabs that wil check if ITS dataset project has 
@@ -26,11 +25,37 @@ const syncUI = (() => {
             e.target.classList.add('active');
             const data = e.target.dataset.id;
             const allTodos = manageTodos.getAllTodos();
-            let filteredTodos = allTodos.filter(todo => todo.project == data);
 
             if(data == 'home') {
                 manageTodos.displayTodos();
+            } else if(data == 'today') {
+                const now = new Date()
+                const lessThen24H = allTodos.filter(todo => {
+                    const dueDate = new Date(todo.dueDate);
+                    if(dueDate > now) {
+                        const diffTime = Math.abs(dueDate - now);
+                        const differenceHours= Math.ceil(diffTime / (1000 * 60 * 60));
+                        if(differenceHours <= 24) {
+                            return todo;
+                        }
+                    }
+                })
+                manageTodos.displayTodos(lessThen24H);
+            } else if(data == 'thisweek') {
+                const now = new Date()
+                const lessThenWeek = allTodos.filter(todo => {
+                    const dueDate = new Date(todo.dueDate);
+                    if(dueDate > now) {
+                        const diffTime = Math.abs(dueDate - now);
+                        const differenceDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        if(differenceDays <= 7) {
+                            return todo;
+                        }
+                    }
+                })
+                manageTodos.displayTodos(lessThenWeek);
             } else {
+                let filteredTodos = allTodos.filter(todo => todo.project == data);
                 manageTodos.displayTodos(filteredTodos);
             }
         }

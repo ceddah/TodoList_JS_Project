@@ -4,7 +4,7 @@ export const manageTodos = (() => {
             {
                 title: 'Learn React',
                 desc: '',
-                dueDate: '2021-06-06',
+                dueDate: '2021-05-19',
                 priority: 'medium',
                 project: 'home',
                 id: 23121313112,
@@ -13,7 +13,7 @@ export const manageTodos = (() => {
             {
                 title: 'Practice on Exercism',
                 desc: '',
-                dueDate: '2021-12-06',
+                dueDate: '2021-05-20',
                 priority: 'low',
                 project: 'study',
                 id: 23121313213,
@@ -146,6 +146,7 @@ export const manageTodos = (() => {
                 const idx = todoData.projects.indexOf(deletedTodosProject);
                 todoData.projects.splice(idx, 1);
                 displayProjects();
+                updateTodoCount();
             }
         }
     } 
