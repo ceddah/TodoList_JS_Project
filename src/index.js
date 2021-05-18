@@ -17,15 +17,15 @@ const syncUI = (() => {
         titles.forEach(title => title.classList.remove('active'));
         e.currentTarget.classList.add('active');
         const data = e.currentTarget.dataset.id;
-        const allTodos = manageTodos.todos;
-
+        const allTodos = manageTodos.getAllTodos();
         let filteredTodos = allTodos.filter(todo => todo.project == data);
+
         if(data == 'home') {
             manageTodos.displayTodos();
         } else {
             manageTodos.displayTodos(filteredTodos);
+            console.log(filteredTodos)
         }
-        console.log(filteredTodos);
     }
 
     //This func managed openning and closing input forms and their respective tabs/categories.

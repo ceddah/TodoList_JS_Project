@@ -43,7 +43,7 @@ export const manageTodos = (() => {
        const newTodo = TODO(...inputs);
        todos.push(newTodo);
     }
-
+    const titles = document.querySelectorAll('.nav-ul .title');
     //Every Time display is called we should display quantity of items in count element
     const displayTodos = (arr = todos) => {
         const todoListUL = document.getElementById('todo-list');
@@ -62,7 +62,6 @@ export const manageTodos = (() => {
             `
         }).join('');
 
-        const titles = document.querySelectorAll('.nav-ul .title');
         titles.forEach(title => {
             const checkFor = title.dataset.id;
             const spanEl = title.nextElementSibling;
@@ -85,6 +84,10 @@ export const manageTodos = (() => {
         return Todo;
     }
 
+    const getAllTodos = () => {
+        return todos;
+    }
+
     const editTodos = (...inputs) => {
         const id = inputs[5];
         const toEditElem = todos.filter(todo => todo.id === Number(id))[0];
@@ -94,12 +97,17 @@ export const manageTodos = (() => {
         toEditElem.priority = inputs[3];
         toEditElem.project = inputs[4];
         displayTodos();
+
+        titles.forEach(title => title.classList.remove('active'));
+        titles[0].classList.add('active');
     }
 
     const removeTodos = (id) => {
         todos = todos.filter(todo => todo.id !== Number(id));
         displayTodos();
-        console.log(todos);
+        titles.forEach(title => title.classList.remove('active'));
+        titles[0].classList.add('active');
+        //HERE should go logic for deleting project if its empty
     } 
 
     const createNewProject = () => {
@@ -107,5 +115,5 @@ export const manageTodos = (() => {
         console.log('furnitute')
     }
     //remove todos from return when we finish
-    return { setTodos, displayTodos, editTodos, removeTodos, getTodo, todos }
+    return { setTodos, displayTodos, editTodos, removeTodos, getTodo, todos, getAllTodos }
 })()
