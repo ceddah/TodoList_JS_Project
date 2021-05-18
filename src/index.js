@@ -5,6 +5,7 @@ console.log('webpack working.1235.');
 
 //On Click, visual stuff.
 const syncUI = (() => {
+    const navUl = document.querySelector('.nav-ul');
     const titles = document.querySelectorAll('.nav-ul .title');
     const addButton = document.querySelector('.addTodo');
     const formOverlay = document.querySelector('.addNewItems-overlay');
@@ -13,16 +14,19 @@ const syncUI = (() => {
     const formWrapper = document.querySelector('.form-wrapper');
 
     const switchTabs = (e) => {
-        titles.forEach(title => title.classList.remove('active'));
-        e.currentTarget.classList.add('active');
-        const data = e.currentTarget.dataset.id;
-        const allTodos = manageTodos.getAllTodos();
-        let filteredTodos = allTodos.filter(todo => todo.project == data);
+        if(e.target.classList.contains('title')) {
+            titles.forEach(title => title.classList.remove('active'));
+            e.target.classList.add('active');
+            const data = e.target.dataset.id;
+            console.log(data);
+            const allTodos = manageTodos.getAllTodos();
+            let filteredTodos = allTodos.filter(todo => todo.project == data);
 
-        if(data == 'home') {
-            manageTodos.displayTodos();
-        } else {
-            manageTodos.displayTodos(filteredTodos);
+            if(data == 'home') {
+                manageTodos.displayTodos();
+            } else {
+                manageTodos.displayTodos(filteredTodos);
+            }
         }
     }
 
@@ -35,7 +39,7 @@ const syncUI = (() => {
     //Maybe set timeout for this so we can load all tabs first...
     //Maybe set timeout for this so we can load all tabs first...
     //Maybe set timeout for this so we can load all tabs first...
-    titles.forEach(title => title.addEventListener('click', switchTabs));
+    navUl.addEventListener('click', switchTabs);
     addButton.addEventListener('click', () => formOverlay.classList.add('addNewItemsActive'));
     closeFormOverlay.addEventListener('click', () => formOverlay.classList.remove('addNewItemsActive'));
     closeDetailsOverlay.addEventListener('click', () => document.querySelector('.details-overlay').classList.remove('details-active'));
