@@ -88,7 +88,6 @@ export const manageTodos = (() => {
         return filteredTodosForTitle;
     }
 
-    //Every Time display is called we should display quantity of items in count element
     const displayTodos = (arr = todoData.todos) => {
         const todoListUL = document.getElementById('todo-list');
         todoListUL.innerHTML = '';
@@ -130,28 +129,47 @@ export const manageTodos = (() => {
     }
 
     const removeTodos = (id) => {
+        //Getting project name of todo we are about to delete.
+        const deletedTodosProject = todoData.todos.filter(todo => {
+            if(todo.id == Number(id)) {
+                return todo;
+            }
+        })[0].project;
+
         todoData.todos = todoData.todos.filter(todo => todo.id !== Number(id));
         displayTodos(displayByActiveTitle());
-        //HERE should go logic for deleting project if its empty
+        
+        //Deleting whole project if it's empty.
+        const checkIfEmpty = todoData.todos.filter(todo => todo.project == deletedTodosProject).length;
+        if(todoData.projects.includes(deletedTodosProject)) {
+            if(checkIfEmpty == 0) {
+                const idx = todoData.projects.indexOf(deletedTodosProject);
+                todoData.projects.splice(idx, 1);
+                displayProjects();
+            }
+        }
     } 
 
     // Managing Projects
-
     const getProjects = () => {
         return todoData.projects;
     }
 
-    const setNewProject = (title) => {
-        todoData.projects.push(title);
-        console.log(todoData);
-    }
-
-    const displayProjects = (ul) => {
-        ul.innerHTML = '';
-        ul.innerHTML = todoData.projects.map(project => {
+    const displayProjects = () => {
+        const projectsUl = document.querySelector('.projects-ul');
+        projectsUl.innerHTML = '';
+        projectsUl.innerHTML = todoData.projects.map(project => {
             return `<li><span class="title" data-id="${project}">/${project.charAt(0).toUpperCase() + project.slice(1)}/</span> <span class="count">0</span></li>`
         }).join('');
     }
+
+    const setNewProject = (title) => {
+        const projectsUl = document.querySelector('.projects-ul');
+        todoData.projects.push(title);
+        displayProjects(projectsUl);
+        updateTodoCount();
+    }
+
     //remove todos from return when we finish
     return { setTodos, 
             displayTodos, 

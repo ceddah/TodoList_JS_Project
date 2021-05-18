@@ -14,13 +14,15 @@ const syncUI = (() => {
     const projectsUl = document.querySelector('.projects-ul');
 
     //Displaying Project Tabs when we first load the page
-    manageTodos.displayProjects(projectsUl);
+    // manageTodos.displayProjects(projectsUl);
+    manageTodos.displayProjects();
 
+    //We need to call a function when switching tabs that wil check if ITS dataset project has 
+    //any length, if it does not display delete project message.
     const switchTabs = (e) => {
         const titles = document.querySelectorAll('.nav-ul .title');
         if(e.target.classList.contains('title')) {
             titles.forEach(title => title.classList.remove('active'));
-            console.log(titles);
             e.target.classList.add('active');
             const data = e.target.dataset.id;
             const allTodos = manageTodos.getAllTodos();
@@ -50,6 +52,7 @@ const syncUI = (() => {
 const Controller = (() => {
     let editFlag = false;
     let editElement = undefined;
+    let currentActiveTitle = undefined;
 
     const newTodoForm = document.querySelector('.create_new_todo form');
     const newProjectForm = document.querySelector('.create_new_project form');
@@ -95,10 +98,35 @@ const Controller = (() => {
         }
     }
 
+    const updateProjectOptions = () => {
+        const projects = manageTodos.getProjects();
+        const allOptions = projects.reduce((total, item) => {
+            if(!total.includes(item)) {
+                total.push(item);
+            }
+            return total;
+        }, ['home']);
+
+        selectedProjectInput.innerHTML = '';
+        selectedProjectInput.innerHTML = allOptions.map(project => {
+            return `
+                <option value="${project}">${project == 'home' ? 'None' : project}</option>
+            `
+        }).join('');
+    }
+
     const addNewProject = (e) => {
         e.preventDefault();
         const newProjectTitle = newProjectTitleInput.value;
         manageTodos.setNewProject(newProjectTitle);
+        newProjectTitleInput.value = '';
+        updateProjectOptions();
+        //We need to set new active title because we are recreateing all Tabs and title loses active class
+        const projectsUl = document.querySelector('.projects-ul');
+        const newTitle = projectsUl.querySelector(`[data-id=${newProjectTitle}]`);
+        newTitle.classList.add('active');
+        manageTodos.displayTodos(manageTodos.displayByActiveTitle());
+        
     }
 
     newTodoForm.addEventListener('submit', addNewTodo);
